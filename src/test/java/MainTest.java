@@ -1,11 +1,10 @@
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
-import org.junit.jupiter.api.Test;
+import org.testng.annotations.Test;
+import static io.restassured.RestAssured.*;
+import static org.hamcrest.Matchers.*;
 
-import static io.restassured.RestAssured.given;
-import static org.hamcrest.CoreMatchers.equalTo;
-
-class MainTest {
+public class MainTest {
 
     @Test
     public void test1() {
@@ -19,7 +18,6 @@ class MainTest {
                 then().
                 statusCode(200).
                 body("id", equalTo(11));
-
     }
 
     @Test
@@ -58,7 +56,7 @@ class MainTest {
     @Test
     public void testPutRequest() {
 
-        String requestBody = "{\"id\": 13, \"name\": \"snake\"}";
+        String requestBody = "{\"id\": 11, \"name\": \"snake\"}";
 
         Response response = given()
                 .header("Content-Type", "application/json")
@@ -78,7 +76,7 @@ class MainTest {
         Response response;
         response = given()
                 .when()
-                .delete("https://petstore.swagger.io/v2/pet/10")
+                .delete("https://petstore.swagger.io/v2/pet/8")
                 .then()
                 .statusCode(404)
                 .extract()
